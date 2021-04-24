@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour {
 
     [SerializeField]
-    private SpriteRenderer HighlightSpriteRenderer;
+    protected SpriteRenderer HighlightSpriteRenderer;
 
     [Header("Tile Configurations")]
     [SerializeField]
@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour {
         HighlightSpriteRenderer.enabled = true;
     }
 
-    public void Reset() {
+    public virtual void Reset() {
         HighlightSpriteRenderer.enabled = false;
     }
 

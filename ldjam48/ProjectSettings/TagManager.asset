@@ -47,8 +47,14 @@ TagManager:
   - name: Foreground
     uniqueID: 107178877
     locked: 0
+  - name: Partially-Visible-Tile
+    uniqueID: 2262764255
+    locked: 0
   - name: Enemy
     uniqueID: 62811923
+    locked: 0
+  - name: Not-Visible-Tile
+    uniqueID: 1401601781
     locked: 0
   - name: Player
     uniqueID: 2442550137

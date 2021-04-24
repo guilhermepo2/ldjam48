@@ -26,6 +26,12 @@ public class Hero : MonoBehaviour {
 
     private void Start() {
         TurnBasedManager.s_Instance.AddActor(m_ActorReference);
+        m_ActorReference.OnActorMoved += UpdateVisibility;
+        UpdateVisibility();
+    }
+
+    private void UpdateVisibility() {
+        GetComponentInChildren<FourthDimension.Roguelike.FieldOfView>().RefreshVisibility(transform.position);
     }
 
     private void InitializeHero() {

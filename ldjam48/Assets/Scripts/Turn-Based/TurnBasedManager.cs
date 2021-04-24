@@ -36,7 +36,7 @@ public class TurnBasedManager : MonoBehaviour {
 
         m_KnownActors = new List<Actor>();
         m_AllTiles = FindObjectsOfType<Tile>();
-        OnTurnWasTaken += ResetAllTiles;
+        // OnTurnWasTaken += ResetAllTiles;
     }
 
     private void Update() {
