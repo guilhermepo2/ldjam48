@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(DynamicActor))]
 public class Hero : MonoBehaviour {
 
     private BaseInput m_PlayerInput;

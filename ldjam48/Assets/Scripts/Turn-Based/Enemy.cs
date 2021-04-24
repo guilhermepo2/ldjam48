@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DynamicActor))]
 public class Enemy : MonoBehaviour {
     private DynamicActor m_Actor;
 
