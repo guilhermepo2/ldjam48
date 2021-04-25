@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5273514943298381716}
   - component: {fileID: 5273514943298381718}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 107178877
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 8467589a2957e394dad5a6eefe3e0a1d, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5273514943630312071}
   - component: {fileID: 5273514943630312073}
   - component: {fileID: 8801157503646859782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Downstairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

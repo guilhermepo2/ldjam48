@@ -8,10 +8,16 @@ public class Hero : MonoBehaviour {
     private EMovementDirection m_CurrentMovementDirection;
     private DynamicActor m_ActorReference;
 
+    private bool m_bIsInitialized;
+
     private bool m_IsInputBlocked = false;
     public bool IsInputBlocked {
         get { return m_IsInputBlocked; }
         set { m_IsInputBlocked = value; }
+    }
+
+    private void Awake() {
+        m_bIsInitialized = false;
     }
 
     private void Start() {
@@ -19,19 +25,31 @@ public class Hero : MonoBehaviour {
     }
 
     public void InitializeHero() {
+        
+        if(m_bIsInitialized) {
+            return;
+        }
+
         m_ActorReference = GetComponent<DynamicActor>();
 
         m_ActorReference.TurnDelegate = TakeTurn;
         m_ActorReference.OnActorDied += Die;
         m_ActorReference.OnActorMoved += UpdateVisibility;
+        m_ActorReference.OnActorInteractedWith += OnInteractedWith;
         TurnBasedManager.s_Instance.AddActor(m_ActorReference);
 
         m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
         GetComponent<ActorHealthComponent>().SetMaxHealth(m_ActorReference.ActorStats.Constitution);
+        m_bIsInitialized = true;
     }
     
     public void UpdateVisibility() {
         GetComponentInChildren<FourthDimension.Roguelike.FieldOfView>().RefreshVisibility(transform.position);
+    }
+
+    public void UpdatePosition(Vector2 _position) {
+        this.transform.position = _position;
+        m_ActorReference.CurrentPosition = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
     }
 
     private void Update() {
@@ -48,5 +66,11 @@ public class Hero : MonoBehaviour {
 
     private void Die() {
 
+    }
+
+    private void OnInteractedWith(Collider2D other) {
+        if(other.name.Contains("Downstairs")) { // this is bad lol
+            DungeonManager.instance.GoDeeper();
+        }
     }
 }

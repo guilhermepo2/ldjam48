@@ -40,6 +40,11 @@ public abstract class Actor : MonoBehaviour {
         m_ActorName = ActorName;
     }
 
+    public void ForceDestroy() {
+        TurnBasedManager.s_Instance.RemoveActor(this);
+        Destroy(this.gameObject);
+    }
+
     /// <summary>
     /// Called from the Turn Based Manager - Grants the actor a turn.
     /// </summary>

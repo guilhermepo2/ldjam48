@@ -18,6 +18,8 @@ public class ResourceLocator : MonoBehaviour {
         m_AvailableLevels       = new List<string>();
         m_AlreadyPlayedLevels   = new List<string>();
         LoadAllLevels();
+
+        CurrentDifficulty = 0;
     }
 
     [Header("Monster Database")]
@@ -56,6 +58,10 @@ public class ResourceLocator : MonoBehaviour {
         m_AvailableLevels.Remove(level);
         m_AlreadyPlayedLevels.Add(level);
         return level;
+    }
+
+    public void GoDeeper() {
+        CurrentDifficulty++;
     }
 
     // TODO

@@ -53,6 +53,25 @@ public class DungeonManager : MonoBehaviour {
         FindObjectOfType<Hero>().GetComponent<DynamicActor>().OnActorMoved += ProcessTurn;
     }
 
+    public void GoDeeper() {
+        // clean up current floor
+        foreach(DungeonTile dt in m_AllTiles) {
+            Destroy(dt.gameObject);
+        }
+        m_AllTiles.Clear();
+
+        // clean up actors (except player)
+        foreach(Actor _a in FindObjectsOfType<Actor>()) {
+            if(_a.ActorType != EActorType.EAT_Player) {
+                _a.ForceDestroy();
+            }
+        }
+
+        ResourceLocator.instance.GoDeeper();
+        string Level = ResourceLocator.instance.GetPlayableLevel();
+        LoadDungeon(Level);
+    }
+
     private void ProcessTurn() {
         m_TurnCounter++;
 
@@ -88,8 +107,8 @@ public class DungeonManager : MonoBehaviour {
         m_AllTiles.Add(extra);
 
         Hero theHero = FindObjectOfType<Hero>();
-        theHero.transform.position = TheDungeon.StartPosition;
         theHero.InitializeHero();
+        theHero.UpdatePosition(TheDungeon.StartPosition);
 
         foreach(DungeonTile dt in m_AllTiles) {
             Debug.Log("Initializing all Tiles...");

@@ -46,6 +46,9 @@ public class DynamicActor : Actor {
     public event System.Action OnActorDied;
     public event System.Action OnActorInteracted;
     public TurnDelegate TurnDelegate;
+
+    public delegate void CollisionDelegate(Collider2D other);
+    public event CollisionDelegate OnActorInteractedWith;
     // -------------------------------------------------
 
     // TIMING ------------------------------------------
@@ -145,13 +148,11 @@ public class DynamicActor : Actor {
         Collider2D TriggerCollision = CheckIfHasTriggerCollision(m_CurrentPosition + _MovementDirection);
 
         if (TriggerCollision) {
-            // IInteractable Interactable = TriggerCollision.GetComponent<IInteractable>();
-            // Interactable?.Interact();
             OnActorInteracted?.Invoke();
+            OnActorInteractedWith?.Invoke(TriggerCollision);
         }
 
-
-        return !HasCollision;
+        return !HasCollision && !TriggerCollision;
     }
 
     public bool IsMovementLegal(Vector2 _MovementDirection) {
