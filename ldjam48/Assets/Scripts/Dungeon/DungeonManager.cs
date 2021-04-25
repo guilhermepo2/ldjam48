@@ -40,8 +40,7 @@ public class DungeonManager : MonoBehaviour {
     }
 
     public void LoadDungeon(string _filepath) {
-        string JsonData = File.ReadAllText($"{Application.dataPath}{m_prependPath}/{_filepath}");
-        DungeonObject LoadedDungeon = JsonUtility.FromJson<DungeonObject>(JsonData);
+        DungeonObject LoadedDungeon = DungeonHelpers.LoadDungeon($"{m_prependPath}/{_filepath}");
         InstantiateDungeon(LoadedDungeon);
     }
 
@@ -57,11 +56,5 @@ public class DungeonManager : MonoBehaviour {
         }
     }
 
-    public void SaveDungeon(DungeonObject dungeon) {
-        string JsonFile = JsonUtility.ToJson(dungeon, true);
-        Debug.Log(JsonFile);
-        Debug.Log(Application.dataPath);
-
-        File.WriteAllText($"{Application.dataPath}{m_prependPath}/test0.json", JsonFile);
-    }
+    
 }
