@@ -7,6 +7,8 @@ public class DungeonLevelEditor : MonoBehaviour {
 
     private const string m_prependPath = "/Levels";
 
+    public float CameraMoveSpeed = 5.0f;
+
     [Header("Feedback Sprites")]
     public Sprite Ground;
     public Sprite Wall;
@@ -20,17 +22,21 @@ public class DungeonLevelEditor : MonoBehaviour {
     [Header("UI")]
     public InputField FilenameInput;
 
-    private int Width = 5;
-    private int Height = 5;
+    private int Width = 10;
+    private int Height = 10;
 
     public static DungeonLevelEditor instance;
     private DungeonLevelEditorCell[] m_AllCells;
+
+    private Camera MainCameraReference;
 
     private void Awake() {
         instance = this;
     }
 
     private void Start() {
+        MainCameraReference = Camera.main;
+
         for(int i = -Width; i <= Width; i++) {
             for(int j = -Height; j <= Height; j++) {
                 DungeonLevelEditorCell dlec = Instantiate(LevelEditorCell, new Vector3(i, j, 0), Quaternion.identity).GetComponent<DungeonLevelEditorCell>();
@@ -39,6 +45,22 @@ public class DungeonLevelEditor : MonoBehaviour {
         }
 
         m_AllCells = FindObjectsOfType<DungeonLevelEditorCell>();
+    }
+
+    private void Update() {
+        if(Input.GetKey(KeyCode.S)) {
+            MainCameraReference.transform.Translate(Vector3.down * Time.deltaTime * CameraMoveSpeed);
+        } else if(Input.GetKey(KeyCode.W)) {
+            MainCameraReference.transform.Translate(Vector3.up * Time.deltaTime * CameraMoveSpeed);
+        } else if(Input.GetKey(KeyCode.D)) {
+            MainCameraReference.transform.Translate(Vector3.right * Time.deltaTime * CameraMoveSpeed);
+        } else if(Input.GetKey(KeyCode.A)) {
+            MainCameraReference.transform.Translate(Vector3.left * Time.deltaTime * CameraMoveSpeed);
+        }
+
+        if(Input.mouseScrollDelta.y != 0) {
+            MainCameraReference.orthographicSize = MainCameraReference.orthographicSize - Input.mouseScrollDelta.y;
+        }
     }
 
     public void SaveFile() {

@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6349488ca66fc1e4b83059f37f9c2435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraMoveSpeed: 10
   Ground: {fileID: 7482667652216324306, guid: 8467589a2957e394dad5a6eefe3e0a1d, type: 3}
   Wall: {fileID: -3606742503928967513, guid: 59b12fdc4c214c44abe341277f0498c9, type: 3}
   StartingPosition: {fileID: 8866965522397569799, guid: 59b12fdc4c214c44abe341277f0498c9, type: 3}
