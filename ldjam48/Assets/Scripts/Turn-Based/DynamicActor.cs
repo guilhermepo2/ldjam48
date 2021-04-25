@@ -154,6 +154,17 @@ public class DynamicActor : Actor {
         return !HasCollision;
     }
 
+    public bool IsMovementLegal(Vector2 _MovementDirection) {
+        Actor ActorOnPosition = TurnBasedManager.s_Instance.WhatActorIsAt(m_CurrentPosition + _MovementDirection);
+
+        if(ActorOnPosition != null && ActorOnPosition.ActorType == m_ActorType) {
+            return false;
+        }
+
+        bool HasCollision = CheckIfHasCollision(m_CurrentPosition + _MovementDirection);
+        return !HasCollision;
+    }
+
     protected bool CheckIfHasCollision(Vector2 _Position) {
         Collider2D BlockedCollision = Physics2D.OverlapCircle(_Position, 0.05f, CollideWith);
         return (BlockedCollision != null);
@@ -278,7 +289,7 @@ public class DynamicActor : Actor {
 
     protected virtual void Die() {
         OnActorDied?.Invoke();
-        // TurnBasedManager.s_Instance.RemoveDynamicActorFromTurnList(this);
+        TurnBasedManager.s_Instance.RemoveActor(this);
         Destroy(gameObject);
     }
     #endregion

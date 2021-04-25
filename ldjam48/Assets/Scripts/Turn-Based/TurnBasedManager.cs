@@ -22,6 +22,10 @@ public class TurnBasedManager : MonoBehaviour {
         m_KnownActors.Add(_a);
         return true;
     }
+    public bool RemoveActor(Actor _a) {
+        m_KnownActors.Remove(_a);
+        return true;
+    }
 
     private int m_CurrentActorTurn = 0;
     public event System.Action OnTurnWasTaken;
