@@ -59,6 +59,8 @@ public class DungeonTile : Tile {
 
     private void UpdateSpriteRenderer(Color _color, string _sortingLayer) {
         ShowHighlight(_color);
+        // we also have to update the parent's sprite renderer otherwise we can still see stuff when the tiles are partially visible lol
+        m_spriteRenderer.transform.parent.GetComponent<SpriteRenderer>().sortingLayerName = _sortingLayer; // nice lmao
         m_spriteRenderer.sortingLayerName = _sortingLayer;
     }
 }
