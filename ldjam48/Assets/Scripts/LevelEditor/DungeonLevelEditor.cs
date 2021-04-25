@@ -22,8 +22,8 @@ public class DungeonLevelEditor : MonoBehaviour {
     [Header("UI")]
     public InputField FilenameInput;
 
-    private int Width = 10;
-    private int Height = 10;
+    private int Width = 6;
+    private int Height = 6;
 
     public static DungeonLevelEditor instance;
     private DungeonLevelEditorCell[] m_AllCells;

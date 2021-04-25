@@ -43,7 +43,7 @@ public class DungeonManager : MonoBehaviour {
         }
 
         m_AllTiles = new List<DungeonTile>();
-        LoadDungeon("level0.json");
+        LoadDungeon("0_level5.json");
 
         FindObjectOfType<Hero>().GetComponent<DynamicActor>().OnActorMoved += ProcessTurn;
     }
