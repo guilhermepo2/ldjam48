@@ -43,8 +43,13 @@ public class DungeonManager : MonoBehaviour {
         }
 
         m_AllTiles = new List<DungeonTile>();
-        LoadDungeon("0_level5.json");
+        
+    }
 
+    private void Start() {
+        string Level = ResourceLocator.instance.GetPlayableLevel();
+        Debug.Log($"Loading Dungeon {Level}");
+        LoadDungeon(Level);
         FindObjectOfType<Hero>().GetComponent<DynamicActor>().OnActorMoved += ProcessTurn;
     }
 
@@ -58,7 +63,7 @@ public class DungeonManager : MonoBehaviour {
     }
 
     public void LoadDungeon(string _filepath) {
-        DungeonObject LoadedDungeon = DungeonHelpers.LoadDungeon($"{m_prependPath}/{_filepath}");
+        DungeonObject LoadedDungeon = DungeonHelpers.LoadDungeon(_filepath);
         InstantiateDungeon(LoadedDungeon);
     }
 

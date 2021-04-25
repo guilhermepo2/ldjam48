@@ -15,22 +15,23 @@ public class Hero : MonoBehaviour {
     }
 
     private void Start() {
-        TurnBasedManager.s_Instance.AddActor(m_ActorReference);
-        m_ActorReference.OnActorMoved += UpdateVisibility;
-    }
-
-    public void UpdateVisibility() {
-        GetComponentInChildren<FourthDimension.Roguelike.FieldOfView>().RefreshVisibility(transform.position);
+        m_PlayerInput = new AxisInput();
     }
 
     public void InitializeHero() {
         m_ActorReference = GetComponent<DynamicActor>();
+
         m_ActorReference.TurnDelegate = TakeTurn;
         m_ActorReference.OnActorDied += Die;
+        m_ActorReference.OnActorMoved += UpdateVisibility;
+        TurnBasedManager.s_Instance.AddActor(m_ActorReference);
 
-        m_PlayerInput = new AxisInput();
         m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
         GetComponent<ActorHealthComponent>().SetMaxHealth(m_ActorReference.ActorStats.Constitution);
+    }
+    
+    public void UpdateVisibility() {
+        GetComponentInChildren<FourthDimension.Roguelike.FieldOfView>().RefreshVisibility(transform.position);
     }
 
     private void Update() {

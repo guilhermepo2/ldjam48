@@ -5,7 +5,7 @@ using System.IO;
 
 public static class DungeonHelpers {
     public static DungeonObject LoadDungeon(string Path) {
-        string JsonData = File.ReadAllText($"{Application.dataPath}{Path}");
+        string JsonData = File.ReadAllText($"{Path}");
         DungeonObject LoadedDungeon = JsonUtility.FromJson<DungeonObject>(JsonData);
         return LoadedDungeon;
     }

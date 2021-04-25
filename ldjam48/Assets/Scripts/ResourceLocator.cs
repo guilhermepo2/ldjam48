@@ -17,6 +17,7 @@ public class ResourceLocator : MonoBehaviour {
         m_AllLevels             = new List<string>();
         m_AvailableLevels       = new List<string>();
         m_AlreadyPlayedLevels   = new List<string>();
+        LoadAllLevels();
     }
 
     [Header("Monster Database")]
@@ -34,12 +35,27 @@ public class ResourceLocator : MonoBehaviour {
     [Header("Player Equipments")]
     public Weapon PlayerWeapon;
 
-    private void Start() {
-        foreach(string file in System.IO.Directory.GetFiles($"{Application.dataPath}/Levels/")) {
-            if(!file.Contains(".meta")) {
+    private void LoadAllLevels() {
+        foreach (string file in System.IO.Directory.GetFiles($"{Application.dataPath}/Levels/")) {
+            if (!file.Contains(".meta")) {
                 m_AllLevels.Add(file);
+                m_AvailableLevels.Add(file);
             }
         }
+    }
+
+    public string GetPlayableLevel() {
+        if(m_AvailableLevels.Count == 0) {
+            foreach(string tLevel in m_AlreadyPlayedLevels) {
+                m_AvailableLevels.Add(tLevel);
+            }
+            m_AvailableLevels.Clear();
+        }
+
+        string level = m_AvailableLevels.RandomOrDefault();
+        m_AvailableLevels.Remove(level);
+        m_AlreadyPlayedLevels.Add(level);
+        return level;
     }
 
     // TODO
