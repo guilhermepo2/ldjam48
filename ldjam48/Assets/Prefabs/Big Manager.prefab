@@ -59,5 +59,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5228f33d345472e48ae76aa2cc622089, type: 2}
   - {fileID: 11400000, guid: 625bc4d16f0793347917ab9b8bbb0280, type: 2}
   - {fileID: 11400000, guid: 0248bd63420dff142acd3820db9d0c03, type: 2}
+  Foods:
+  - {fileID: 11400000, guid: e22c028b2da6ac34f8b10d17375b4785, type: 2}
+  - {fileID: 11400000, guid: 4b08928279762cc458b305a5f80b8984, type: 2}
+  - {fileID: 11400000, guid: aaf72063b7dc45c439eab6e0306017bc, type: 2}
+  - {fileID: 11400000, guid: 9c6d9707c2535e843bd7907b63fa84ac, type: 2}
+  - {fileID: 11400000, guid: 3ecf772a082c40541ae63527a9a62e4b, type: 2}
+  - {fileID: 11400000, guid: 869364148f9feb14ba3bebfef3bc832c, type: 2}
   CurrentDifficulty: 0
   PlayerWeapon: {fileID: 11400000, guid: 0168672edfbcad348a01302af0718a70, type: 2}
