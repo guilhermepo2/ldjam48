@@ -7,8 +7,8 @@ public class DungeonManager : MonoBehaviour {
     [Header("Prefabs")]
     public GameObject DungeonGround;
     public GameObject DungeonWall;
-    // public GameObject Upstairs;
-    // public GameObject Downstairs;
+    public GameObject Upstairs;
+    public GameObject Downstairs;
 
     public static DungeonManager instance;
 
@@ -36,7 +36,7 @@ public class DungeonManager : MonoBehaviour {
         }
 
         m_AllTiles = new List<DungeonTile>();
-        LoadDungeon("test0.json");
+        LoadDungeon("myfirstlevel.json");
     }
 
     public void LoadDungeon(string _filepath) {
@@ -54,7 +54,21 @@ public class DungeonManager : MonoBehaviour {
             DungeonTile dt = Instantiate(DungeonGround, GroundPosition, Quaternion.identity).GetComponent<DungeonTile>();
             m_AllTiles.Add(dt);
         }
+
+        DungeonTile up = Instantiate(Upstairs, TheDungeon.UpstairsPosition, Quaternion.identity).GetComponent<DungeonTile>();
+        m_AllTiles.Add(up);
+
+        DungeonTile down = Instantiate(Downstairs, TheDungeon.DownstairsPosition, Quaternion.identity).GetComponent<DungeonTile>();
+        m_AllTiles.Add(down);
+
+        Hero theHero = FindObjectOfType<Hero>();
+        theHero.transform.position = TheDungeon.StartPosition;
+        theHero.InitializeHero();
+
+        DungeonTile extra = Instantiate(DungeonGround, TheDungeon.StartPosition, Quaternion.identity).GetComponent<DungeonTile>();
+        m_AllTiles.Add(extra);
+
+        theHero.UpdateVisibility();
     }
 
-    
 }

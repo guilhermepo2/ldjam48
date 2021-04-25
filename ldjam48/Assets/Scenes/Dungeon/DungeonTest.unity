@@ -7699,6 +7699,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DungeonGround: {fileID: 611607620408732677, guid: f5ab81b0bc2bc6f4da14a35a2245e1cb, type: 3}
   DungeonWall: {fileID: 4283039911011638064, guid: 7ca12f3d0687eee42821f6a44f686070, type: 3}
+  Upstairs: {fileID: 525830789141411225, guid: 270c2c558852da948a8d7228f1486601, type: 3}
+  Downstairs: {fileID: 5273514943630312070, guid: 51fcbb0989f719a46b8167d5d8879c4a, type: 3}
 --- !u!4 &1955880473
 Transform:
   m_ObjectHideFlags: 0

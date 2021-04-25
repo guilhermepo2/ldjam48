@@ -14,27 +14,20 @@ public class Hero : MonoBehaviour {
         set { m_IsInputBlocked = value; }
     }
 
-    private void Awake() {
-        m_ActorReference = GetComponent<DynamicActor>();
-
-        if (m_ActorReference != null) {
-            InitializeHero();
-            m_ActorReference.TurnDelegate = TakeTurn;
-            m_ActorReference.OnActorDied += Die;
-        }
-    }
-
     private void Start() {
         TurnBasedManager.s_Instance.AddActor(m_ActorReference);
         m_ActorReference.OnActorMoved += UpdateVisibility;
-        UpdateVisibility();
     }
 
-    private void UpdateVisibility() {
+    public void UpdateVisibility() {
         GetComponentInChildren<FourthDimension.Roguelike.FieldOfView>().RefreshVisibility(transform.position);
     }
 
-    private void InitializeHero() {
+    public void InitializeHero() {
+        m_ActorReference = GetComponent<DynamicActor>();
+        m_ActorReference.TurnDelegate = TakeTurn;
+        m_ActorReference.OnActorDied += Die;
+
         m_PlayerInput = new AxisInput();
         m_ActorReference.InitializeActor(EActorType.EAT_Player);
     }
