@@ -29,7 +29,7 @@ public class Hero : MonoBehaviour {
         m_ActorReference.OnActorDied += Die;
 
         m_PlayerInput = new AxisInput();
-        m_ActorReference.InitializeActor(EActorType.EAT_Player);
+        m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
         GetComponent<ActorHealthComponent>().SetMaxHealth(m_ActorReference.ActorStats.Constitution);
     }
 

@@ -15,6 +15,13 @@ public enum EActorType {
 }
 
 public abstract class Actor : MonoBehaviour {
+    protected string m_ActorName;
+    public string ActorName {
+        get {
+            return m_ActorName;
+        }
+    }
+
     protected Vector2 m_CurrentPosition;
     public Vector2 CurrentPosition {
         get { return this.m_CurrentPosition; }
@@ -27,9 +34,10 @@ public abstract class Actor : MonoBehaviour {
         set { m_ActorType = value; }
     }
 
-    public virtual void InitializeActor(EActorType _ActorType) {
+    public virtual void InitializeActor(EActorType _ActorType, string ActorName) {
         m_CurrentPosition = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
         m_ActorType = _ActorType;
+        m_ActorName = ActorName;
     }
 
     /// <summary>

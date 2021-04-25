@@ -79,7 +79,7 @@ public class TurnBasedManager : MonoBehaviour {
         Damage = Mathf.Max(Damage, 0);
 
         _BeingAttackedActor.SufferedDamage(Damage);
-        Debug.Log($"{_AttackingActor.name} dealt {Damage} damage to {_BeingAttackedActor.name}");
+        Debug.Log($"{_AttackingActor.ActorName} dealt {Damage} damage to {_BeingAttackedActor.ActorName}");
 
     }
     #endregion

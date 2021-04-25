@@ -65,8 +65,8 @@ public class DynamicActor : Actor {
     // Overriding actor functions
     //
     // ========================================================
-    public override void InitializeActor(EActorType _ActorType) {
-        base.InitializeActor(_ActorType);
+    public override void InitializeActor(EActorType _ActorType, string _ActorName) {
+        base.InitializeActor(_ActorType, _ActorName);
 
         if (ActorStats == null) {
             Debug.LogError($"{this.name} doesn't have Actor Stats assigned!");

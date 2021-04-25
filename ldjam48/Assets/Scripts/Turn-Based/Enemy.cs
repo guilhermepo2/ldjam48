@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour {
 
     private void Awake() {
         m_Actor = GetComponent<DynamicActor>();
-        m_Actor.InitializeActor(EActorType.EAT_Enemy);
+        m_Actor.InitializeActor(EActorType.EAT_Enemy, MonsterStat.MonsterName);
         GetComponent<ActorHealthComponent>().SetMaxHealth(MonsterStat.HitPoints);
     }
 
