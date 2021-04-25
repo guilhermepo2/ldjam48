@@ -18,20 +18,4 @@ public class DungeonObject {
         DownstairsPosition = Vector2.zero;
         Difficulty = 0;
     }
-
-    /*
-    public bool LoadFromFile(string FilePath) {
-        string JsonData = File.ReadAllText($"{Application.dataPath}/Levels/{FilePath}");
-        DungeonObject djo = JsonUtility.FromJson<DungeonObject>(JsonData);
-
-        GroundPositions = djo.GroundPositions;
-        WallPositions = djo.WallPositions;
-        StartPosition = djo.StartPosition;
-        UpstairsPosition = djo.UpstairsPosition;
-        DownstairsPosition = djo.DownstairsPosition;
-        Difficulty = djo.Difficulty;
-
-        return true;
-    }
-     */
 }

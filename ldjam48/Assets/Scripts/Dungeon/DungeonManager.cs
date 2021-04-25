@@ -36,7 +36,7 @@ public class DungeonManager : MonoBehaviour {
         }
 
         m_AllTiles = new List<DungeonTile>();
-        LoadDungeon("myfirstlevel.json");
+        LoadDungeon("ExampleLevel.json");
     }
 
     public void LoadDungeon(string _filepath) {
@@ -61,14 +61,19 @@ public class DungeonManager : MonoBehaviour {
         DungeonTile down = Instantiate(Downstairs, TheDungeon.DownstairsPosition, Quaternion.identity).GetComponent<DungeonTile>();
         m_AllTiles.Add(down);
 
+        DungeonTile extra = Instantiate(DungeonGround, TheDungeon.StartPosition, Quaternion.identity).GetComponent<DungeonTile>();
+        m_AllTiles.Add(extra);
+
         Hero theHero = FindObjectOfType<Hero>();
         theHero.transform.position = TheDungeon.StartPosition;
         theHero.InitializeHero();
 
-        DungeonTile extra = Instantiate(DungeonGround, TheDungeon.StartPosition, Quaternion.identity).GetComponent<DungeonTile>();
-        m_AllTiles.Add(extra);
+        foreach(DungeonTile dt in m_AllTiles) {
+            Debug.Log("Initializing all Tiles...");
+            dt.InitializeTile();
+        }
 
-        theHero.UpdateVisibility();
+        FindObjectOfType<FourthDimension.Roguelike.FieldOfView>().InitializeFieldOfView(TheDungeon.StartPosition);
     }
 
 }

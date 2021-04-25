@@ -39,12 +39,9 @@ public class DungeonTile : Tile {
     public bool IsWall;
     public bool BlockVision;
 
-    private void Awake() {
-        InitializeTile(transform.position);
-    }
-
-    public void InitializeTile(Vector2 _tilePosition) {
+    public void InitializeTile() {
         m_spriteRenderer = HighlightSpriteRenderer.GetComponent<SpriteRenderer>();
+        m_spriteRenderer.enabled = true;
         m_isTileVisible = false;
         m_wasTileDiscovered = false;
         UpdateSpriteRenderer(nonVisibleColor, nonVisibleSpriteMask);

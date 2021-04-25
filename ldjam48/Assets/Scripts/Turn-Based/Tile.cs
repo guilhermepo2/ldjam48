@@ -11,10 +11,6 @@ public class Tile : MonoBehaviour {
     [SerializeField]
     private LayerMask ObstacleLayers;
 
-    private void Start() {
-        Reset();
-    }
-
     public bool IsClear() {
         Collider2D Obstacle = Physics2D.OverlapCircle(transform.position, 0.15f, ObstacleLayers);
         return Obstacle == null;
