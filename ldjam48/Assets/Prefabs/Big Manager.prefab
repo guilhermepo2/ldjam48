@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5332314936929381596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5332314936929381597}
+  - component: {fileID: 5332314936929381586}
+  m_Layer: 0
+  m_Name: Big Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5332314936929381597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332314936929381596}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5332314936929381586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332314936929381596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a86cf913d8e7942963241251ac8c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterPrefabs:
+  - {fileID: 1109556509421849684, guid: 71cf29f0c1d570241ad3c22dea080f3b, type: 3}
+  - {fileID: 3847673652693064650, guid: 918394f520a2b11469ead618e87835c2, type: 3}
+  - {fileID: 639674725340054176, guid: 7e9182d12b79ba54cb84d66a909389c7, type: 3}
+  - {fileID: 2976471976387382838, guid: 045227c61e30ff84a85eac04fc703234, type: 3}
+  - {fileID: 6095123941251195145, guid: 8e106084f44c91f41af431ca827f19df, type: 3}
+  Weapons:
+  - {fileID: 11400000, guid: 0168672edfbcad348a01302af0718a70, type: 2}
+  - {fileID: 11400000, guid: ba7407550d9b7c147b13f77a98280d94, type: 2}
+  - {fileID: 11400000, guid: 761dca3909f44184992c445e9685006a, type: 2}
+  - {fileID: 11400000, guid: 2da192e276446a54d90596469daefb3c, type: 2}
+  - {fileID: 11400000, guid: 2bd576c508d16714bae620f0d95638d6, type: 2}
+  - {fileID: 11400000, guid: 5acbd93547a9b0c4dae71c385364d9ea, type: 2}
+  - {fileID: 11400000, guid: 5228f33d345472e48ae76aa2cc622089, type: 2}
+  - {fileID: 11400000, guid: 625bc4d16f0793347917ab9b8bbb0280, type: 2}
+  - {fileID: 11400000, guid: 0248bd63420dff142acd3820db9d0c03, type: 2}
+  CurrentDifficulty: 0
+  PlayerWeapon: {fileID: 11400000, guid: 0168672edfbcad348a01302af0718a70, type: 2}

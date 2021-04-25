@@ -6,9 +6,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
     private DynamicActor m_Actor;
 
+    public MonsterStats MonsterStat;
+
     private void Awake() {
         m_Actor = GetComponent<DynamicActor>();
         m_Actor.InitializeActor(EActorType.EAT_Enemy);
+        GetComponent<ActorHealthComponent>().SetMaxHealth(MonsterStat.HitPoints);
     }
 
     private void Start() {

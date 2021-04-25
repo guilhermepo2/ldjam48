@@ -7,14 +7,11 @@
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(ActorHealthComponent))]
 public class DynamicActor : Actor {
-    protected int m_CurrentHealth;
-    public int CurrentHealth {
-        get { return m_CurrentHealth; }
-        set { m_CurrentHealth = value; }
-    }
 
     public Stats ActorStats;
+    private ActorHealthComponent m_Health;
 
     [Header("Handling Collisions")]
     public LayerMask CollideWith;
@@ -58,6 +55,7 @@ public class DynamicActor : Actor {
     // -------------------------------------------------
 
     private void Start() {
+        m_Health = GetComponent<ActorHealthComponent>();
         m_ActorSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_FlashDelayWait = new WaitForSeconds(FLASH_DELAY_TIME);
     }
@@ -73,8 +71,6 @@ public class DynamicActor : Actor {
         if (ActorStats == null) {
             Debug.LogError($"{this.name} doesn't have Actor Stats assigned!");
         }
-
-        m_CurrentHealth = ActorStats.MaxHealth;
     }
 
     public override bool TakeTurn() {
@@ -117,7 +113,16 @@ public class DynamicActor : Actor {
 
         if (ActorToInteract != null) {
             if (ActorToInteract is DynamicActor && ActorToInteract.ActorType != m_ActorType) {
-                TurnBasedManager.s_Instance.HandleCombat(this, (DynamicActor)ActorToInteract);
+
+                // need to get the attacker roll type!
+                Weapon.EWeaponRoll RollType = Weapon.EWeaponRoll.R1d4;
+                if(ActorType == EActorType.EAT_Player) {
+                    RollType = ResourceLocator.instance.PlayerWeapon.RollType;
+                } else if(ActorType == EActorType.EAT_Enemy) {
+                    RollType = GetComponent<Enemy>().MonsterStat.DamageRoll;
+                }
+
+                TurnBasedManager.s_Instance.HandleCombat(this, (DynamicActor)ActorToInteract, RollType);
                 return true;
             }
         }
@@ -256,15 +261,15 @@ public class DynamicActor : Actor {
     }
 
     public virtual void Heal(int _Amount) {
-        CurrentHealth = Mathf.Clamp(CurrentHealth + _Amount, 0, ActorStats.MaxHealth);
+        m_Health.Heal(_Amount);
         OnActorHealed?.Invoke();
     }
 
     public virtual void SufferedDamage(int _Damage) {
-        m_CurrentHealth -= _Damage;
+        m_Health.TakeDamage(_Damage);
         OnActorWasHit?.Invoke();
 
-        if (m_CurrentHealth <= 0) {
+        if (m_Health.IsDead) {
             Die();
             return;
         }

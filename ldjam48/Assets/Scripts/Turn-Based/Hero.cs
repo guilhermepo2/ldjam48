@@ -30,6 +30,7 @@ public class Hero : MonoBehaviour {
 
         m_PlayerInput = new AxisInput();
         m_ActorReference.InitializeActor(EActorType.EAT_Player);
+        GetComponent<ActorHealthComponent>().SetMaxHealth(m_ActorReference.ActorStats.Constitution);
     }
 
     private void Update() {

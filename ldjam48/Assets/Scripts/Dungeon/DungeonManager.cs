@@ -10,6 +10,13 @@ public class DungeonManager : MonoBehaviour {
     public GameObject Upstairs;
     public GameObject Downstairs;
 
+    // ---------------------------------------
+    // Monster Spawning
+    private int m_NextSpawn = 5;
+    private int m_MinToNextSpawn = 20;
+    private int m_MaxToNextSpawn = 30;
+    private int m_TurnCounter;
+
     public static DungeonManager instance;
 
     private const string m_prependPath = "/Levels";
@@ -37,6 +44,17 @@ public class DungeonManager : MonoBehaviour {
 
         m_AllTiles = new List<DungeonTile>();
         LoadDungeon("ExampleLevel.json");
+
+        FindObjectOfType<Hero>().GetComponent<DynamicActor>().OnActorMoved += ProcessTurn;
+    }
+
+    private void ProcessTurn() {
+        m_TurnCounter++;
+
+        if(m_TurnCounter == m_NextSpawn) {
+            SpawnRandomMonster();
+            m_NextSpawn += Random.Range(m_MinToNextSpawn, m_MaxToNextSpawn);
+        }
     }
 
     public void LoadDungeon(string _filepath) {
@@ -75,5 +93,25 @@ public class DungeonManager : MonoBehaviour {
 
         FindObjectOfType<FourthDimension.Roguelike.FieldOfView>().InitializeFieldOfView(TheDungeon.StartPosition);
     }
+
+    #region Monster Spawning
+    private void SpawnRandomMonster() {
+        
+        Debug.Log("Spawning Monster");
+
+        GameObject MonsterToSpawn = ResourceLocator.instance.MonsterPrefabs.RandomOrDefault();
+        List<Vector3> PossiblePositions = new List<Vector3>();
+
+        foreach(DungeonTile dt in m_AllTiles) {
+            if(!dt.IsVisible && !dt.IsWall) {
+                PossiblePositions.Add(dt.transform.position);
+            }
+        }
+
+        if(PossiblePositions.Count > 0) {
+            Instantiate(MonsterToSpawn, PossiblePositions.RandomOrDefault(), Quaternion.identity);
+        }
+    }
+    #endregion
 
 }

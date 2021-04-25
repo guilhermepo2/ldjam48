@@ -36,7 +36,6 @@ public class TurnBasedManager : MonoBehaviour {
 
         m_KnownActors = new List<Actor>();
         m_AllTiles = FindObjectsOfType<Tile>();
-        // OnTurnWasTaken += ResetAllTiles;
     }
 
     private void Update() {
@@ -67,10 +66,17 @@ public class TurnBasedManager : MonoBehaviour {
     //
     // =================================================================================================
     #region HANDLING COMBAT
-    public void HandleCombat(DynamicActor _AttackingActor, DynamicActor _BeingAttackedActor) {
+    public void HandleCombat(DynamicActor _AttackingActor, DynamicActor _BeingAttackedActor, Weapon.EWeaponRoll AttackerRoll) {
+        
         _AttackingActor.DealtDamage();
-        _BeingAttackedActor.SufferedDamage(_AttackingActor.ActorStats.BaseDamage);
-        // ShowFeedbackText(_BeingAttackedActor.CurrentPosition, _AttackingActor.ActorStats.BaseDamage.ToString(), Color.red);
+
+        int AttackerModifier = CombatHelpers.CalculateModifier(_AttackingActor.ActorStats.Strength);
+        int Damage = CombatHelpers.CalculateDamage(AttackerModifier, AttackerRoll);
+        Damage = Mathf.Max(Damage, 0);
+
+        _BeingAttackedActor.SufferedDamage(Damage);
+        Debug.Log($"{_AttackingActor.name} dealt {Damage} damage to {_BeingAttackedActor.name}");
+
     }
     #endregion
 

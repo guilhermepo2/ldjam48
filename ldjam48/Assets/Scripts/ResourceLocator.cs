@@ -14,6 +14,18 @@ public class ResourceLocator : MonoBehaviour {
         }
     }
 
+    [Header("Monster Database")]
+    public GameObject[] MonsterPrefabs;
+
+    [Header("Weapon Database")]
+    public Weapon[] Weapons;
+
+    [Header("Dungeon Settings")]
+    public int CurrentDifficulty;
+
+    [Header("Player Equipments")]
+    public Weapon PlayerWeapon;
+
     // TODO
     // Inventory
     // Save
