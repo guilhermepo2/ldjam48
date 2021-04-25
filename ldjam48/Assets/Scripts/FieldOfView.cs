@@ -105,22 +105,6 @@ namespace FourthDimension.Roguelike {
             BobNystromShadowCast
         }
 
-        private DungeonTile[] m_AllTiles;
-
-        private DungeonTile GetTileOnPosition(float x, float y) {
-            for (int i = 0; i < m_AllTiles.Length; i++) {
-                if (m_AllTiles[i].transform.position == new Vector3(x, y, m_AllTiles[i].transform.position.z)) {
-                    return m_AllTiles[i];
-                }
-            }
-
-            return null;
-        }
-
-        private void Start() {
-            m_AllTiles = FindObjectsOfType<DungeonTile>();
-        }
-
         private const EFieldOfViewMethod km_method = EFieldOfViewMethod.BobNystromShadowCast;
         private const bool km_fovLightWalls = true;
         private const int km_fovTorchRadius = 5;
@@ -132,12 +116,11 @@ namespace FourthDimension.Roguelike {
 
         public void RefreshVisibility(Vector2 _originPosition) {
             
-            if(m_AllTiles.Length == 0) {
-                // we don't refresh if there is no tiles... (i.e. we are in the city, or in case something went very wrong)
+            if(!DungeonManager.instance.HasTiles) {
                 return;
             }
 
-            DungeonTile TileInThisPosition = GetTileOnPosition(_originPosition.x, _originPosition.y);
+            DungeonTile TileInThisPosition = DungeonManager.instance.GetTileOnPosition(_originPosition.x, _originPosition.y);
             TileInThisPosition.WasTileDiscovered = true;
             TileInThisPosition.IsVisible = true;
             TileInThisPosition.UpdateTile();
@@ -159,7 +142,7 @@ namespace FourthDimension.Roguelike {
             for (int row = 1; row < km_maxDistance; row++) {
                 for (int col = 0; col <= row; col++) {
                     Vector2 position = _originPosition + ConvertPositionToOctantPosition(row, col, _octant);
-                    DungeonTile CurrentTile = GetTileOnPosition(position.x, position.y);
+                    DungeonTile CurrentTile = DungeonManager.instance.GetTileOnPosition(position.x, position.y);
 
                     if (CurrentTile == null) {
                         continue;
