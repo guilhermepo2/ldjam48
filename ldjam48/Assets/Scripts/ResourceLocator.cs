@@ -4,7 +4,6 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 
-
 public class PlayerInventory {
     public int HealthPotions;
     public int Gold;
@@ -15,6 +14,14 @@ public class PlayerInventory {
         HealthPotions = 0;
         Gold = 0;
         FoodCount = new List<int>();
+    }
+
+    public void Reset() {
+        HealthPotions = 2;
+        Gold = 0;
+        for(int i = 0; i < FoodCount.Count; i++) {
+            FoodCount[i] = 0;
+        }
     }
 }
 
@@ -27,6 +34,12 @@ public class PlayerLevelStats {
         CurrentLevel = 1;
         ExtraStrength = 0;
         ExtraConstitution = 0;
+    }
+
+    public void Reset() {
+        CurrentLevel = 0;
+        ExtraConstitution = 0;
+        ExtraStrength = 0;
     }
 }
 
@@ -147,7 +160,7 @@ public class ResourceLocator : MonoBehaviour {
     }
 
     private void LoadAllLevels() {
-        foreach (string file in System.IO.Directory.GetFiles($"{Application.dataPath}/Levels/")) {
+        foreach (string file in System.IO.Directory.GetFiles($"{Application.dataPath}/StreamingAssets/Levels/")) {
             if (!file.Contains(".meta")) {
                 m_AllLevels.Add(file);
                 m_AvailableLevels.Add(file);
@@ -252,5 +265,20 @@ public class ResourceLocator : MonoBehaviour {
 
     public void GoToCityScene() {
         SceneManager.LoadScene("City");
+    }
+
+    public void GoToMenu() {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    // ------------------------------------------------------------------
+    public void GameOver() {
+        if(IsDungeon()) {
+            DungeonHUD.instance.GameOverPanel.SetActive(true);
+            m_PlayerInventory.Reset();
+            m_PlayerLevelStats.Reset();
+        }
+
+        // there's no way the game will end outside of the dungeon... right?
     }
 }

@@ -8991,6 +8991,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485705, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485705, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: orthographic size
+      value: 5.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485705, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.03125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485705, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.03125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485705, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.9375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485705, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.9375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931672667300485707, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
+      propertyPath: m_StretchFill
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4931672667300485711, guid: de92d65db8294f14bbde62e22d796fd8, type: 3}
       propertyPath: m_Name
       value: CityCamera

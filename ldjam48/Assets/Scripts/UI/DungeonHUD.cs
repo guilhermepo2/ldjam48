@@ -7,6 +7,7 @@ public class DungeonHUD : MonoBehaviour {
     public static DungeonHUD instance;
 
     public GameObject GoToCity;
+    public GameObject GameOverPanel;
 
     private void Awake() {
         instance = this;
@@ -28,5 +29,9 @@ public class DungeonHUD : MonoBehaviour {
 
     public void ClickedGoToCity() {
         ResourceLocator.instance.GoToCityScene();
+    }
+
+    public void ClickedGoToMenu() {
+        ResourceLocator.instance.GoToMenu();
     }
 }

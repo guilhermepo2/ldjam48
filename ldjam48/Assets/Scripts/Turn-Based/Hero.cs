@@ -112,7 +112,7 @@ public class Hero : MonoBehaviour {
     }
 
     private void Die() {
-
+        ResourceLocator.instance.GameOver();
     }
 
     private void CityOnInteractedWith(Collider2D other) {
