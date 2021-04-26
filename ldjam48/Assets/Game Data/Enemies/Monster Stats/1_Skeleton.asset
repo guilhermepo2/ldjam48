@@ -18,3 +18,5 @@ MonoBehaviour:
   Speed: 30
   Challenge: 1
   Experience: 50
+  DamageRoll: 0
+  FoodToDrop: []

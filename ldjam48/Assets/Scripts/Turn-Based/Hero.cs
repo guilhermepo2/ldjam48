@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(DynamicActor))]
 public class Hero : MonoBehaviour {
 
+    public event System.Action OnHeroInitialized;
+
     private BaseInput m_PlayerInput;
     private EMovementDirection m_CurrentMovementDirection;
     private DynamicActor m_ActorReference;
@@ -40,6 +42,7 @@ public class Hero : MonoBehaviour {
 
         m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
         GetComponent<ActorHealthComponent>().SetMaxHealth(m_ActorReference.ActorStats.Constitution);
+        OnHeroInitialized?.Invoke();
         m_bIsInitialized = true;
     }
     
@@ -71,6 +74,10 @@ public class Hero : MonoBehaviour {
     private void OnInteractedWith(Collider2D other) {
         if(other.name.Contains("Downstairs")) { // this is bad lol
             DungeonManager.instance.GoDeeper();
+        } else if(other.GetComponent<FoodDrop>() != null) {
+            FoodDrop whatIGot = other.GetComponent<FoodDrop>();
+            ResourceLocator.instance.PlayerPickedUpFood(whatIGot.foodObject);
+            Destroy(other.gameObject);
         }
     }
 }

@@ -17,6 +17,7 @@ public class InGameHPHud : MonoBehaviour {
     private void Start() {
         FindObjectOfType<Hero>().GetComponent<DynamicActor>().OnActorWasHit += UpdateHealth;
         FindObjectOfType<Hero>().GetComponent<DynamicActor>().OnActorHealed += UpdateHealth;
+        FindObjectOfType<Hero>().OnHeroInitialized += UpdateHealth;
     }
 
     private void UpdateHealth() {

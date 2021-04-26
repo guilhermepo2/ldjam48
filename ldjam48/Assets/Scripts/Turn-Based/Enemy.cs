@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
         m_HeroReference = FindObjectOfType<Hero>();
         m_Actor.TurnDelegate = TakeTurn;
         m_Actor.OnActorWasHit += TakeDamage;
+        m_Actor.OnActorDied += EnemyDie;
 
         Debug.Log($"Adding enemy {name} to actor list");
         TurnBasedManager.s_Instance.AddActor(m_Actor);
@@ -60,5 +61,18 @@ public class Enemy : MonoBehaviour {
         }
 
         return true;
+    }
+
+    private void EnemyDie() {
+        if(MonsterStat.FoodToDrop.Length > 0) {
+            if(Random.value < 0.25f) { // giving a 20% chance flat to drop food
+                Food drop = MonsterStat.FoodToDrop.RandomOrDefault();
+                if(drop != null) {
+                    FoodDrop dropObject = Instantiate(ResourceLocator.instance.FoodDropPrefab, m_Actor.CurrentPosition, Quaternion.identity).GetComponent<FoodDrop>();
+                    dropObject.foodObject = drop;
+                    dropObject.ApplyFood();
+                }
+            }
+        }
     }
 }

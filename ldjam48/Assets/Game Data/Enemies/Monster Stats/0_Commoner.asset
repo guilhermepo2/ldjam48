@@ -18,3 +18,7 @@ MonoBehaviour:
   Speed: 30
   Challenge: 0
   Experience: 10
+  DamageRoll: 0
+  FoodToDrop:
+  - {fileID: 11400000, guid: e22c028b2da6ac34f8b10d17375b4785, type: 2}
+  - {fileID: 11400000, guid: 869364148f9feb14ba3bebfef3bc832c, type: 2}

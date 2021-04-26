@@ -47,6 +47,7 @@ public class ResourceLocator : MonoBehaviour {
 
     [Header("Food Database")]
     public Food[] Foods;
+    public GameObject FoodDropPrefab;
 
     [Header("Dungeon Settings")]
     public int CurrentDifficulty;
@@ -95,6 +96,28 @@ public class ResourceLocator : MonoBehaviour {
 
     public void GoDeeper() {
         CurrentDifficulty++;
+    }
+
+    public void PlayerPickedUpFood(Food foodObject) {
+        for(int i = 0; i < m_PlayerInventory.FoodCount.Count; i++) {
+            if(foodObject.FoodName == Foods[i].FoodName) {
+                m_PlayerInventory.FoodCount[i]++;
+            }
+        }
+
+        foreach(UIFoodContainer container in FindObjectsOfType<UIFoodContainer>()) {
+            container.Apply();
+        }
+    }
+
+    public int GetFoodCountFromFoodObject(Food foodObject) {
+        for(int i = 0; i < m_PlayerInventory.FoodCount.Count; i++) {
+            if(foodObject.FoodName == Foods[i].FoodName) {
+                return m_PlayerInventory.FoodCount[i];
+            }
+        }
+
+        return 0;
     }
 
     // TODO

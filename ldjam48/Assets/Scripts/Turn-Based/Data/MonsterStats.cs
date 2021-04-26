@@ -14,4 +14,5 @@ public class MonsterStats : ScriptableObject {
     public int Experience;
 
     public Weapon.EWeaponRoll DamageRoll;
+    public Food[] FoodToDrop;
 }
