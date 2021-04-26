@@ -120,6 +120,22 @@ public class ResourceLocator : MonoBehaviour {
         return 0;
     }
 
+    public void PlayerWantsToEat(Food foodObject) {
+        for(int i = 0; i < m_PlayerInventory.FoodCount.Count; i++) {
+            if(foodObject.FoodName == Foods[i].FoodName) {
+                if(m_PlayerInventory.FoodCount[i] > 0) {
+                    FindObjectOfType<Hero>().AddFood(foodObject.CanHealNTimes);
+                    m_PlayerInventory.FoodCount[i] -= 1;
+
+                    foreach (UIFoodContainer container in FindObjectsOfType<UIFoodContainer>()) {
+                        container.Apply();
+                    }
+                }
+                break;
+            }
+        }
+    }
+
     // TODO
     // Inventory
     // Save

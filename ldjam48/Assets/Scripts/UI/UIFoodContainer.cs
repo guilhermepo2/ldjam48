@@ -19,4 +19,8 @@ public class UIFoodContainer : MonoBehaviour {
         m_ImageReference.sprite = foodObject.sprite;
         m_FoodCount.text = $"{ResourceLocator.instance.GetFoodCountFromFoodObject(foodObject)}";
     }
+
+    public void Eat() {
+        ResourceLocator.instance.PlayerWantsToEat(foodObject);
+    }
 }

@@ -523,7 +523,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 334370195}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 334370193}
+        m_TargetAssemblyTypeName: UIFoodContainer, Assembly-CSharp
+        m_MethodName: Eat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &334370195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +929,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 575001980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 575001978}
+        m_TargetAssemblyTypeName: UIFoodContainer, Assembly-CSharp
+        m_MethodName: Eat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &575001980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,7 +1230,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 690250001}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 690249999}
+        m_TargetAssemblyTypeName: UIFoodContainer, Assembly-CSharp
+        m_MethodName: Eat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &690250001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,7 +1523,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 882997733}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882997735}
+        m_TargetAssemblyTypeName: UIFoodContainer, Assembly-CSharp
+        m_MethodName: Eat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &882997733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1926,7 +1974,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1305577691}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1305577689}
+        m_TargetAssemblyTypeName: UIFoodContainer, Assembly-CSharp
+        m_MethodName: Eat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1305577691
 MonoBehaviour:
   m_ObjectHideFlags: 0

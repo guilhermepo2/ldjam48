@@ -10,6 +10,12 @@ public class Hero : MonoBehaviour {
     private EMovementDirection m_CurrentMovementDirection;
     private DynamicActor m_ActorReference;
 
+    // Food Related...
+    private const int m_MaxFoodTicks = 30;
+    private int m_CurrentFoodTicks = 0;
+    private const int m_HealEveryNTurns = 3;
+    private int m_FoodHealingTurnCounter = 0;
+
     private bool m_bIsInitialized;
 
     private bool m_IsInputBlocked = false;
@@ -37,6 +43,7 @@ public class Hero : MonoBehaviour {
         m_ActorReference.TurnDelegate = TakeTurn;
         m_ActorReference.OnActorDied += Die;
         m_ActorReference.OnActorMoved += UpdateVisibility;
+        m_ActorReference.OnActorMoved += TickFood;
         m_ActorReference.OnActorInteractedWith += OnInteractedWith;
         TurnBasedManager.s_Instance.AddActor(m_ActorReference);
 
@@ -53,6 +60,23 @@ public class Hero : MonoBehaviour {
     public void UpdatePosition(Vector2 _position) {
         this.transform.position = _position;
         m_ActorReference.CurrentPosition = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+    }
+
+    private void TickFood() {
+        m_FoodHealingTurnCounter++;
+
+        if(m_FoodHealingTurnCounter % m_HealEveryNTurns == 0) {
+            if(m_CurrentFoodTicks > 0) {
+                m_CurrentFoodTicks -= 1;
+                m_ActorReference.Heal(1);
+            }
+
+            m_FoodHealingTurnCounter = 0;
+        }
+    }
+
+    public void AddFood(int _Amount) {
+        m_CurrentFoodTicks = Mathf.Min(m_CurrentFoodTicks + _Amount, m_MaxFoodTicks);
     }
 
     private void Update() {
