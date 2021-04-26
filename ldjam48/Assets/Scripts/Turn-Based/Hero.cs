@@ -52,6 +52,21 @@ public class Hero : MonoBehaviour {
         OnHeroInitialized?.Invoke();
         m_bIsInitialized = true;
     }
+
+    public void InitializeForCity() {
+        if(m_bIsInitialized) {
+            return;
+        }
+
+        m_ActorReference = GetComponent<DynamicActor>();
+        m_ActorReference.TurnDelegate = TakeTurn;
+        m_ActorReference.OnActorInteractedWith += OnInteractedWith;
+        m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
+
+        TurnBasedManager.s_Instance.AddActor(m_ActorReference);
+
+        m_bIsInitialized = true;
+    }
     
     public void UpdateVisibility() {
         GetComponentInChildren<FourthDimension.Roguelike.FieldOfView>().RefreshVisibility(transform.position);

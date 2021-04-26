@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerInventory {
@@ -32,6 +33,10 @@ public class PlayerLevelStats {
 public class ResourceLocator : MonoBehaviour {
     public static ResourceLocator instance;
 
+    public bool IsDungeon() {
+        return SceneManager.GetActiveScene().name == "Dungeon";
+    }
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -47,7 +52,14 @@ public class ResourceLocator : MonoBehaviour {
 
         CurrentDifficulty = 0;
         InitializePlayerInventory();
-        FindObjectOfType<PotionAndGoldContainer>().Apply();
+    }
+
+    private void Start() {
+        if(IsDungeon()) {
+            FindObjectOfType<PotionAndGoldContainer>().Apply();
+        } else { // we are in the city...
+            FindObjectOfType<Hero>().InitializeForCity();
+        }
     }
 
     [Header("Monster Database")]
