@@ -37,6 +37,10 @@ public class ResourceLocator : MonoBehaviour {
         return SceneManager.GetActiveScene().name == "Dungeon";
     }
 
+    public bool IsCity() { // LOL!!!
+        return SceneManager.GetActiveScene().name == "City";
+    }
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -61,7 +65,7 @@ public class ResourceLocator : MonoBehaviour {
 
         if (IsDungeon()) {
             FindObjectOfType<PotionAndGoldContainer>().Apply();
-        } else { // we are in the city...
+        } else if(IsCity()) { // we are in the city...
             FindObjectOfType<Hero>().InitializeForCity();
         }
     }

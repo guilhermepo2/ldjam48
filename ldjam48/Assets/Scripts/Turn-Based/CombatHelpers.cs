@@ -3,6 +3,18 @@ using UnityEngine;
 public static class CombatHelpers {
     public static int[] ModifierLookupTable = { -5, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10 };
 
+    public static int CalculateModifier(int Score) {
+        if (Score > 30) {
+            Score = 30;
+        }
+
+        if (Score < 1) {
+            Score = 1;
+        }
+
+        return ModifierLookupTable[Score];
+    }
+
     public static int CalculateDamage(int AttackerModifier, Weapon.EWeaponRoll RollType) {
         int TotalDamage = AttackerModifier;
 
@@ -29,17 +41,5 @@ public static class CombatHelpers {
         }
 
         return TotalDamage;
-    }
-
-    public static int CalculateModifier(int Score) {
-        if (Score > 30) {
-            Score = 30;
-        }
-
-        if(Score < 1) {
-            Score = 1;
-        }
-
-        return ModifierLookupTable[Score];
     }
 }
