@@ -116,6 +116,30 @@ public class DungeonManager : MonoBehaviour {
         }
 
         FindObjectOfType<FourthDimension.Roguelike.FieldOfView>().InitializeFieldOfView(TheDungeon.StartPosition);
+
+        List<Vector3> PossiblePositions = new List<Vector3>();
+        foreach (DungeonTile dt in m_AllTiles) {
+            if (!dt.IsVisible && !dt.IsWall) {
+                PossiblePositions.Add(dt.transform.position);
+            }
+        }
+
+        if (Random.value < 0.35f) { // 35% of spawning gold on the floor
+            Debug.Log("Spawned gold!");
+
+            Vector3 Position = PossiblePositions.RandomOrDefault();
+            PossiblePositions.Remove(Position);
+
+            ResourceDrop goldDrop = Instantiate(ResourceLocator.instance.GoldPrefab, Position, Quaternion.identity).GetComponent<ResourceDrop>();
+            goldDrop.Amount = Random.Range(5, 15);
+        }
+
+        if(Random.value < 0.1f) { // 10% of spawning a potion
+            Debug.Log("Spawned a potion!");
+
+            Vector3 Position = PossiblePositions.RandomOrDefault();
+            Instantiate(ResourceLocator.instance.PotionPrefab, Position, Quaternion.identity);
+        }
     }
 
     #region Monster Spawning

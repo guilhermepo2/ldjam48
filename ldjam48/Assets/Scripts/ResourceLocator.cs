@@ -5,17 +5,27 @@ using System.IO;
 
 
 public class PlayerInventory {
-    public int SmallHealthPotions;
-    public int MediumHealthPotions;
-    public int LargeHealthPotions;
+    public int HealthPotions;
+    public int Gold;
 
     public List<int> FoodCount;
 
     public PlayerInventory() {
-        SmallHealthPotions = 0;
-        MediumHealthPotions = 0;
-        LargeHealthPotions = 0;
+        HealthPotions = 0;
+        Gold = 0;
         FoodCount = new List<int>();
+    }
+}
+
+public class PlayerLevelStats {
+    public int CurrentLevel;
+    public int ExtraStrength;
+    public int ExtraConstitution;
+
+    public PlayerLevelStats() {
+        CurrentLevel = 1;
+        ExtraStrength = 0;
+        ExtraConstitution = 0;
     }
 }
 
@@ -37,6 +47,7 @@ public class ResourceLocator : MonoBehaviour {
 
         CurrentDifficulty = 0;
         InitializePlayerInventory();
+        FindObjectOfType<PotionAndGoldContainer>().Apply();
     }
 
     [Header("Monster Database")]
@@ -54,15 +65,28 @@ public class ResourceLocator : MonoBehaviour {
     private List<string> m_AllLevels;
     private List<string> m_AvailableLevels;
     private List<string> m_AlreadyPlayedLevels;
+    public GameObject PotionPrefab;
+    public GameObject GoldPrefab;
 
     [Header("Player Equipments")]
     public Weapon PlayerWeapon;
     private PlayerInventory m_PlayerInventory;
+    private PlayerLevelStats m_PlayerLevelStats;
+    public int PotionCount {
+        get {
+            return m_PlayerInventory.HealthPotions;
+        }
+    }
+    public int GoldCount {
+        get {
+            return m_PlayerInventory.Gold;
+        }
+    }
 
     public void InitializePlayerInventory() {
         m_PlayerInventory = new PlayerInventory();
 
-        m_PlayerInventory.SmallHealthPotions = 5;
+        m_PlayerInventory.HealthPotions = 2;
 
         for (int i = 0; i < Foods.Length; i++) {
             m_PlayerInventory.FoodCount.Add(0);
@@ -133,6 +157,28 @@ public class ResourceLocator : MonoBehaviour {
                 }
                 break;
             }
+        }
+    }
+
+    public void PlayerGotResource(ResourceDrop.EResource ResourceType, int Amount) {
+        switch(ResourceType) {
+            case ResourceDrop.EResource.Gold:
+                m_PlayerInventory.Gold += Amount;
+                break;
+            case ResourceDrop.EResource.Potion:
+                m_PlayerInventory.HealthPotions += Amount;
+                break;
+        }
+
+        FindObjectOfType<PotionAndGoldContainer>().Apply();
+    }
+
+    public void PlayerWantsToDrinkPotion() {
+        if(m_PlayerInventory.HealthPotions > 0) {
+            m_PlayerInventory.HealthPotions -= 1;
+            FindObjectOfType<Hero>().GetComponent<DynamicActor>().Heal(15);
+
+            FindObjectOfType<PotionAndGoldContainer>().Apply();
         }
     }
 

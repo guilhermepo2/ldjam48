@@ -68,4 +68,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 869364148f9feb14ba3bebfef3bc832c, type: 2}
   FoodDropPrefab: {fileID: 7416551411380114402, guid: 5c0a62dc092bf124ebed43bf24865aa3, type: 3}
   CurrentDifficulty: 0
+  PotionPrefab: {fileID: 1985434934636249834, guid: e2f943d2d9de50442859f6315275ae66, type: 3}
+  GoldPrefab: {fileID: 7236096859648295531, guid: 6921fd4813331054d9969a77d7708b76, type: 3}
   PlayerWeapon: {fileID: 11400000, guid: 0168672edfbcad348a01302af0718a70, type: 2}

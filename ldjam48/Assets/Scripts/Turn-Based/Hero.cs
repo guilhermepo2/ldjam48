@@ -102,6 +102,10 @@ public class Hero : MonoBehaviour {
             FoodDrop whatIGot = other.GetComponent<FoodDrop>();
             ResourceLocator.instance.PlayerPickedUpFood(whatIGot.foodObject);
             Destroy(other.gameObject);
+        } else if(other.GetComponent<ResourceDrop>()) {
+            ResourceDrop r = other.GetComponent<ResourceDrop>();
+            ResourceLocator.instance.PlayerGotResource(r.ResourceType, r.Amount);
+            Destroy(other.gameObject);
         }
     }
 }
