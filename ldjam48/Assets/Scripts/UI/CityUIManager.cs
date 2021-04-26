@@ -12,7 +12,7 @@ public class CityUIManager : MonoBehaviour {
     }
 
     private void Start() {
-        HideGoToDungeon();
+        GoToDungeon.SetActive(false);
     }
 
     public void ShowGoToDungeon() {

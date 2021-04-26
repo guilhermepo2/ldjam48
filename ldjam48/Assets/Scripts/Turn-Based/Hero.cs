@@ -135,6 +135,8 @@ public class Hero : MonoBehaviour {
             ResourceDrop r = other.GetComponent<ResourceDrop>();
             ResourceLocator.instance.PlayerGotResource(r.ResourceType, r.Amount);
             Destroy(other.gameObject);
+        } else if(other.name.Contains("Upstairs")) {
+            DungeonHUD.instance.ShowGoToCity();
         }
     }
 }
