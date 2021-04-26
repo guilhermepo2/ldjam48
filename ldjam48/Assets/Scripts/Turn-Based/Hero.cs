@@ -60,7 +60,7 @@ public class Hero : MonoBehaviour {
 
         m_ActorReference = GetComponent<DynamicActor>();
         m_ActorReference.TurnDelegate = TakeTurn;
-        m_ActorReference.OnActorInteractedWith += OnInteractedWith;
+        m_ActorReference.OnActorInteractedWith += CityOnInteractedWith;
         m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
 
         TurnBasedManager.s_Instance.AddActor(m_ActorReference);
@@ -108,6 +108,20 @@ public class Hero : MonoBehaviour {
 
     private void Die() {
 
+    }
+
+    private void CityOnInteractedWith(Collider2D other) {
+        NPCs npcInteracted = other.GetComponent<NPCs>();
+
+        if(npcInteracted != null) {
+            switch(npcInteracted.NPCType) {
+                case NPCs.ENPCType.Travel:
+                    CityUIManager.instance.ShowGoToDungeon();
+                    break;
+                case NPCs.ENPCType.Progress:
+                    break;
+            }
+        }
     }
 
     private void OnInteractedWith(Collider2D other) {

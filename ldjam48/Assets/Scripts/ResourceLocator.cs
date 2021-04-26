@@ -33,7 +33,7 @@ public class PlayerLevelStats {
 public class ResourceLocator : MonoBehaviour {
     public static ResourceLocator instance;
 
-    public bool IsDungeon() {
+    public bool IsDungeon() { // lol
         return SceneManager.GetActiveScene().name == "Dungeon";
     }
 
@@ -52,10 +52,13 @@ public class ResourceLocator : MonoBehaviour {
 
         CurrentDifficulty = 0;
         InitializePlayerInventory();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void Start() {
-        if(IsDungeon()) {
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        Debug.Log("Resource Locator Start");
+
+        if (IsDungeon()) {
             FindObjectOfType<PotionAndGoldContainer>().Apply();
         } else { // we are in the city...
             FindObjectOfType<Hero>().InitializeForCity();
@@ -195,9 +198,17 @@ public class ResourceLocator : MonoBehaviour {
     }
 
     // TODO
-    // Inventory
-    // Save
+    // Save (lol)
     // Info on the Dungeon Generation
     // Player Info
     // basically everything that has to be persitent between play sessions and scenes should go here!
+
+    // Changing Scenes
+    public void GoToDungeonScene() {
+        SceneManager.LoadScene("Dungeon");
+    }
+
+    public void GoToCityScene() {
+        SceneManager.LoadScene("City");
+    }
 }
