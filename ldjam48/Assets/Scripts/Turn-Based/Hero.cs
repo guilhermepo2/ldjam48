@@ -48,7 +48,12 @@ public class Hero : MonoBehaviour {
         TurnBasedManager.s_Instance.AddActor(m_ActorReference);
 
         m_ActorReference.InitializeActor(EActorType.EAT_Player, "Hero");
-        GetComponent<ActorHealthComponent>().SetMaxHealth(m_ActorReference.ActorStats.Constitution);
+
+        GetComponent<ActorHealthComponent>().SetMaxHealth(
+            m_ActorReference.ActorStats.Constitution +
+            ResourceLocator.instance.PlayerExtraCon
+            );
+
         OnHeroInitialized?.Invoke();
         m_bIsInitialized = true;
     }
@@ -119,6 +124,7 @@ public class Hero : MonoBehaviour {
                     CityUIManager.instance.ShowGoToDungeon();
                     break;
                 case NPCs.ENPCType.Progress:
+                    CityUIManager.instance.ShowProgressUI();
                     break;
             }
         }

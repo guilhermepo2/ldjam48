@@ -42,15 +42,29 @@ public class Enemy : MonoBehaviour {
             }
 
             if(LegalMovements.Count == 0) {
-                // ?
+                Debug.Log("Enemy has no legal movements...");
                 return true;
             }
 
             Vector2 ChosenMovement = Vector2.zero;
+            Vector2 HeroPosition = m_HeroReference.GetComponent<DynamicActor>().CurrentPosition;
+
             foreach(Vector2 movement in LegalMovements) {
+                // making AI less dumb, but not too smart
+                if(m_Actor.CurrentPosition + movement == HeroPosition) {
+                    // adding a 67% chance of miss just because!
+                    if(Random.value < 0.33f) {
+                        ChosenMovement = movement;
+                    }
+                    break;
+                }
+
+                int DistanceChosenMovement = MathUtilities.ManhattanDistance(m_Actor.CurrentPosition + ChosenMovement, HeroPosition);
+                int DistanceCurrentMovement = MathUtilities.ManhattanDistance(m_Actor.CurrentPosition + movement, HeroPosition);
+
                 if(
-                    MathUtilities.ManhattanDistance(m_Actor.CurrentPosition + movement, m_HeroReference.transform.position) <
-                    MathUtilities.ManhattanDistance(m_Actor.CurrentPosition + ChosenMovement, m_HeroReference.transform.position)
+                    DistanceCurrentMovement <
+                    DistanceChosenMovement
                     ) {
                     ChosenMovement = movement;
                 }

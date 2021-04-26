@@ -73,8 +73,14 @@ public class TurnBasedManager : MonoBehaviour {
     public void HandleCombat(DynamicActor _AttackingActor, DynamicActor _BeingAttackedActor, Weapon.EWeaponRoll AttackerRoll) {
         
         _AttackingActor.DealtDamage();
+        int ExtraStr = 0;
 
-        int AttackerModifier = CombatHelpers.CalculateModifier(_AttackingActor.ActorStats.Strength);
+        if(_AttackingActor.ActorType == EActorType.EAT_Player) {
+            ExtraStr = ResourceLocator.instance.PlayerExtraStr;
+        }
+
+        int AttackerModifier = CombatHelpers.CalculateModifier(_AttackingActor.ActorStats.Strength + ExtraStr);
+
         int Damage = CombatHelpers.CalculateDamage(AttackerModifier, AttackerRoll);
         Damage = Mathf.Max(Damage, 0);
 

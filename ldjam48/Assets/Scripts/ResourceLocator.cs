@@ -52,6 +52,7 @@ public class ResourceLocator : MonoBehaviour {
 
         CurrentDifficulty = 0;
         InitializePlayerInventory();
+        m_PlayerLevelStats = new PlayerLevelStats();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -87,6 +88,35 @@ public class ResourceLocator : MonoBehaviour {
     public Weapon PlayerWeapon;
     private PlayerInventory m_PlayerInventory;
     private PlayerLevelStats m_PlayerLevelStats;
+    public void IncrementStr() {
+        m_PlayerLevelStats.ExtraStrength++;
+        m_PlayerLevelStats.CurrentLevel++;
+    }
+
+    public void IncrementCon() {
+        m_PlayerLevelStats.ExtraConstitution++;
+        m_PlayerLevelStats.CurrentLevel++;
+    }
+
+    public int CurrentLevel {
+        get {
+            return m_PlayerLevelStats.CurrentLevel;
+        }
+    }
+
+    public int PlayerExtraCon {
+        get {
+            return m_PlayerLevelStats.ExtraConstitution;
+        }
+    }
+
+    public int PlayerExtraStr {
+        get {
+            return m_PlayerLevelStats.ExtraStrength;
+        }
+    }
+
+
     public int PotionCount {
         get {
             return m_PlayerInventory.HealthPotions;
@@ -96,6 +126,10 @@ public class ResourceLocator : MonoBehaviour {
         get {
             return m_PlayerInventory.Gold;
         }
+    }
+
+    public void RemoveGold(int _Amount) {
+        m_PlayerInventory.Gold = Mathf.Max(m_PlayerInventory.Gold - _Amount, 0);
     }
 
     public void InitializePlayerInventory() {
@@ -144,8 +178,10 @@ public class ResourceLocator : MonoBehaviour {
             }
         }
 
-        foreach(UIFoodContainer container in FindObjectsOfType<UIFoodContainer>()) {
-            container.Apply();
+        if(IsDungeon()) {
+            foreach(UIFoodContainer container in FindObjectsOfType<UIFoodContainer>()) {
+                container.Apply();
+            }
         }
     }
 
@@ -185,7 +221,9 @@ public class ResourceLocator : MonoBehaviour {
                 break;
         }
 
-        FindObjectOfType<PotionAndGoldContainer>().Apply();
+        if(IsDungeon()) {
+            FindObjectOfType<PotionAndGoldContainer>().Apply();
+        }
     }
 
     public void PlayerWantsToDrinkPotion() {
